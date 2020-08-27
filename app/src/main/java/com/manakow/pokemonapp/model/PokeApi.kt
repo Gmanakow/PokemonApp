@@ -1,10 +1,13 @@
 package com.manakow.pokemonapp.model
 
+import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface PokeApi{
     class Instance{
@@ -27,6 +30,14 @@ interface PokeApi{
         }
     }
 
-    @GET("pokemon/1")
-    fun getPokemonByNumber() : Single<PokemonData>
+    @GET("pokemon/{id}")
+    fun getPokemonByNumber(
+        @Path("id") id : Int
+    ) : Single<PokemonData>
+
+    @GET("pokemon/")
+    fun getPokemonByCount(
+        @Query("limit") limit : Int,
+        @Query("offset") offset : Int
+    ) : Single<LimitResultPD>
 }
