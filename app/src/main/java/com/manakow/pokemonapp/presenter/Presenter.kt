@@ -10,6 +10,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
+import org.reactivestreams.Subscriber
 
 class Presenter(val view : CustomView) {
     val pokeApi : PokeApi = PokeApi.Instance().getPokeApi()
@@ -37,9 +38,8 @@ class Presenter(val view : CustomView) {
             .map { it.results }
             .flattenAsObservable { it }
             .subscribe{
-                Log.d("tag", it.name!!  )
+                it-> view.
             }
-
-
+            .dispose()
     }
 }
